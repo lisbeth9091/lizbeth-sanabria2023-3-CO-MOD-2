@@ -3,7 +3,7 @@ import pygame
 from dino_runner.components.obstacles.obstacle import Obstacle
 from dino_runner.utils.constants import BIRD
 
-class Bird(obstacle):
+class Bird(Obstacle):
     BIRD_HEIGHTS = [260, 220, 170]
     y_random = random.choice(BIRD_HEIGHTS)
     step_index = 0
