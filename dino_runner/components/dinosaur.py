@@ -8,6 +8,7 @@ class Dinosaur:
 	X_POS = 80
 	Y_POS = 310
 	JUMP_SPEED = 8.5
+	Y_POS_DUCK = 340
 	def __init__(self):
 		self.image = RUNNING[0]
 		self.dino_rect = self.image.get_rect()
@@ -67,6 +68,4 @@ class Dinosaur:
 		self.dino_rect.x = self.X_POS
 		self.dino_rect.y = 340
 		self.step_index += 1
-		if not user_imput[pygame.K_DOWN]:
-			self.dino_duck = False
-			self.dino_run = True
+		
