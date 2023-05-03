@@ -3,7 +3,7 @@ import pygame
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 from dino_runner.components.dino import Dino
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
-from dino_runner.components.menu import Menu
+from dino_runner.components.menu import Menu 
 from dino_runner.components.counter import Counter
 
 
@@ -21,13 +21,14 @@ class Game:
         self.y_pos_bg = 380
         self.player = Dino()
         self.obstacle_manager = ObstacleManager()
-        self.menu = Menu(self.screen, "Please press any key to start...")
-        self.running = False
+        self.menu = Menu(self.screen, "Please press v to start") #"press r to reset records or press v to play again"
+        self.gameruning = False
         self.score = Counter()
+        self.deaths = 0
 
     def execute(self):
-        self.running = True
-        while self.running:
+        self.gameruning = True
+        while self.gameruning:
             if not self.playing:
                 self.show_menu()
 
@@ -78,7 +79,7 @@ class Game:
         half_screen_width = SCREEN_WIDTH // 2
         half_screen_heigth = SCREEN_HEIGHT // 2
         self.screen.blit(ICON, (half_screen_width - 50, half_screen_heigth - 140))
-        self.menu.draw(self.screen)
+        self.menu.draw(self.screen, self.deaths, self.score.count)
         self.menu.update(self)
 
     def update_score(self):
@@ -89,5 +90,5 @@ class Game:
     def reset_game(self):
         self.obstacle_manager.reset_obstacles()
         self.game_speed = self.GAME_SPEED
-        self.score.reset()
         self.player.reset()
+        self.score.reset()
