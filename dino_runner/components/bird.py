@@ -16,7 +16,6 @@ class Bird(Obstacle):
         if self.index >= 10:
             self.index = 0
 
-        # Bird flying animation
         screen.blit(BIRD[self.index // 5], (self.rect.x, self.rect.y))
         self.index += 1
 

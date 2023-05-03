@@ -1,6 +1,7 @@
 import pygame
 from dino_runner.utils.constants import FONT_STYLE
 
+
 class Counter:
     def __init__(self):
         self.count = 0
@@ -8,6 +9,7 @@ class Counter:
 
     def update(self):
         self.count += 1
+
 
     def draw(self, screen):
         font = pygame.font.Font(FONT_STYLE, 30)
@@ -18,6 +20,6 @@ class Counter:
 
     def reset(self):
         self.count = 0
-
+    
     def set_count(self, value):
         self.count = value

@@ -1,10 +1,11 @@
 import pygame
 
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
-from dino_runner.components.dinosaur import Dinosaur
+from dino_runner.components.dino import Dino
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.menu import Menu
-from dino_runner.components.contador import Counter
+from dino_runner.components.counter import Counter
+
 
 class Game:
     GAME_SPEED = 20
@@ -18,7 +19,7 @@ class Game:
         self.game_speed = self.GAME_SPEED
         self.x_pos_bg = 0
         self.y_pos_bg = 380
-        self.player = Dinosaur()
+        self.player = Dino()
         self.obstacle_manager = ObstacleManager()
         self.menu = Menu(self.screen, "Please press any key to start...")
         self.running = False
@@ -34,9 +35,7 @@ class Game:
         pygame.quit()
 
     def run(self):
-        #reset parameters game
         self.reset_game()
-        # Game loop: events - update - draw
         self.playing = True
         while self.playing:
             self.events()
@@ -50,8 +49,8 @@ class Game:
                 self.playing = False
 
     def update(self):
-        user_imput = pygame.key.get_pressed()
-        self.player.update(user_imput)
+        user_input = pygame.key.get_pressed()
+        self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.update_score()
 
@@ -77,17 +76,15 @@ class Game:
     def show_menu(self):
         self.menu.reset_screen_color(self.screen)
         half_screen_width = SCREEN_WIDTH // 2
-        half_screen_height = SCREEN_HEIGHT // 2
-        self.screen.blit(ICON,(half_screen_width - 50, half_screen_height - 140))
+        half_screen_heigth = SCREEN_HEIGHT // 2
+        self.screen.blit(ICON, (half_screen_width - 50, half_screen_heigth - 140))
         self.menu.draw(self.screen)
         self.menu.update(self)
-        
+
     def update_score(self):
         self.score.update()
         if self.score.count % 100 == 0 and self.game_speed < 500:
             self.game_speed += 5 
-
-       # print(f"Score: {self.score}, Speed: {self.game_speed}")
 
     def reset_game(self):
         self.obstacle_manager.reset_obstacles()
